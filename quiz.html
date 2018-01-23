@@ -1,0 +1,195 @@
+<!DOCTYPE HTML>
+<!--
+    TXT by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>HOGEN</title>
+                 		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body class="homepage">A
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<div class="logo container">
+						<div>
+							<h1><a href="index.html" id="logo">静岡の方言</a></h1>
+							<p>A responsive site template by HTML5 UP</p>
+						</div>
+					</div>
+				</header>
+
+			<!-- Nav -->
+				<nav id="nav">
+    				<ul>
+						<li class="current"><a href="index.html">Home</a></li>
+						<li>
+							<a href="page2.html">方言リスト</a>
+    						
+								<li><a href="quiz.html">方言クイズ</a></li>
+								<li><a href="tenki.html">静岡の天気</a></li>
+								<li>
+									<a href="page3.html">食べきりキャンペーン</a>
+									<ul>
+										<li><a href="page5.html">食べきり協力店一覧</a></li>
+    									<li><a href="tizu.html">食べきり店地図検索</a></li>
+										<li><a href="page4.html">キャンペーンについて</a></li>
+									</ul>
+								</li>
+						
+							</ul>
+						</li>
+						
+					</ul>
+				</nav>
+
+			<!-- Banner -->
+				<div id="banner-wrapper">
+					<section id="banner">
+						<h2>方言クイズ</h2>
+                     
+					</section>
+				</div>
+<br>
+<h2>三択クイズ</h2>
+<br>
+
+<h2>問題</h2>
+<div id="text_q"></div>
+<br>
+<h2>選択</h2>
+<div id="text_s"></div>
+<br>
+<h2>解答</h2>
+<div id="text_a"></div>
+ 
+<script type="text/javascript"> 　
+//問題と解答
+qa = new Array();
+qa[0] = ["その紙いらないならうっちゃっといて～","売る","捨てる","投げる",2];
+qa[1] = ["子供がちんぶりかえる","ふてくされる","でんぐりがえし","後ろを振り向く",1];
+qa[2] = ["おじいちゃんが作ったみかん、めっちゃおぞかったよ。","美味しい","しょぼい","苦い",2];
+qa[3] = ["いまからとんでくでー","飛ぶ","歩く","走る",3];
+qa[4] = ["まったく、しょんないなぁ～","しょうがない","金がない","旬じゃない",1];
+qa[5] = ["あんもー食べる？","あんこ","餅","芋",3];
+qa[6] = ["いぐらもちが出た","もち","いくら","もぐら",3];
+qa[7] = ["明日おっさまが来るらしい","大様","おっさん","お坊さん",3];
+qa[8] = ["あー、もうやっきりするわー","腹立たしい","ドキドキする","ドッキリする",1];
+qa[9] = ["うちっち来る？","私の家","望月さんち","私たち",1];
+ 
+//初期設定
+q_sel = 3; //選択肢の数
+ 
+setReady();
+ 
+//初期設定
+function setReady() {
+    count = 0; //問題番号
+	ansers = new Array(); //解答記録
+	
+	//最初の問題
+	quiz();
+}
+ 
+//問題表示
+function quiz() {
+	var s, n;
+	//問題
+	document.getElementById("text_q").innerHTML = (count + 1) + "問目：" + qa[count][0];
+	//選択肢
+	s = "";
+	for (n=1;n<=q_sel;n++) {
+		if (qa[count][n] != "") {
+			s += "【<a href='javascript:anser(" + n + ")'>" + n + "：" + qa[count][n] + "</a>】";
+		}
+	}
+	document.getElementById("text_s").innerHTML = s;
+}
+ 
+//解答表示
+function anser(num) {
+	var s;
+	s = (count + 1) + "問目：";
+	//答え合わせ
+	if (num == qa[count][q_sel + 1]) {
+		//正解
+		ansers[count] = "○";
+	} else {
+		ansers[count] = "×";
+	}
+	s += ansers[count] + qa[count][num];
+	document.getElementById("text_a").innerHTML = s;
+	
+	//次の問題を表示
+	count++;
+	if (count < qa.length) {
+		quiz();
+	} else {
+		//終了
+		s = "<table border='2'><caption>成績発表</caption>";
+		//1行目
+		s += "<tr><th>問題</th>";
+		for (n=0;n<qa.length;n++) {
+			s += "<th>" + (n+1) + "</th>";
+		}
+		s += "</tr>";
+		//2行目
+		s += "<tr><th>成績</th>";
+		for (n=0;n<qa.length;n++) {
+			s += "<td>" + ansers[n] + "</td>";
+		}
+		s += "</tr>";
+		s += "</table>";
+		document.getElementById("text_q").innerHTML = s;
+		//次の選択肢
+		s = "【<a href='javascript:history.back()'>前のページに戻る</a>】";
+		s += "【<a href='javascript:setReady()'>同じ問題を最初から</a>】";
+		s += "【<a href=''>次の問題に進む</a>】";
+		document.getElementById("text_s").innerHTML = s;
+	}
+}
+</script>
+
+			<!-- Main -->
+				<div id="main-wrapper">
+					<div id="main" class="container">
+						<div class="row 200%">
+							<div class="12u">
+
+								<!-- Highlight -->
+									<section class="box highlight">
+										<ul class="special">
+                							<li><a href="index.html"<i class="fa fa-home" aria-hidden="true"></i></span></a>home</li>
+                                            <li><a href="tenki.html" <i class="fa fa-cloud" aria-hidden="true"></i></span></a>weather</li>
+											<li><a href="page3.html" <i class="fa fa-cutlery" aria-hidden="true"></i></span></a>food</li>
+											<li><a href="page2.html" <i class="fa fa-server" aria-hidden="true"></i></span></a>list</li>
+										</ul>
+										<header>
+											<h2>上のアイコンから選んでください</h2>
+											
+										</header>
+										
+									</section>
+
+							</div>
+						</div>
+	
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/skel-viewport.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
